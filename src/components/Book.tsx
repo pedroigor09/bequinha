@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../styles/book.css';
 
 interface BookProps {
@@ -10,6 +10,7 @@ interface BookProps {
 
 const Book = ({ isOpen, onClose }: BookProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -29,6 +30,24 @@ const Book = ({ isOpen, onClose }: BookProps) => {
     }
   };
 
+  const nextPage = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({
+        left: carouselRef.current.clientWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const prevPage = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({
+        left: -carouselRef.current.clientWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -41,34 +60,36 @@ const Book = ({ isOpen, onClose }: BookProps) => {
         ✕
       </button>
 
-      {/* Polaroids flutuantes */}
+      {/* Polaroids flutuantes - apenas topo */}
       <div className="polaroid polaroid-1">
         <img src="/polaroid1.jpg" alt="Polaroid 1" />
       </div>
       <div className="polaroid polaroid-2">
         <img src="/polaroid2.jpg" alt="Polaroid 2" />
       </div>
-      <div className="polaroid polaroid-3">
-        <img src="/polaroid3.jpg" alt="Polaroid 3" />
-      </div>
-      <div className="polaroid polaroid-4">
-        <img src="/polaroid4.jpg" alt="Polaroid 4" />
-      </div>
+      
+      {/* Polaroids flutuantes - apenas embaixo */}
       <div className="polaroid polaroid-5">
         <img src="/polaroid5.jpg" alt="Polaroid 5" />
       </div>
       <div className="polaroid polaroid-6">
         <img src="/polaroid6.jpg" alt="Polaroid 6" />
       </div>
-      <div className="polaroid polaroid-7">
-        <img src="/polaroid7.jpg" alt="Polaroid 7" />
-      </div>
 
       <div className="container">
         <h1>Diário da Mel</h1>
+        
+        {/* Setas de navegação apenas para mobile */}
+        <button className="book-arrow book-arrow-left" onClick={prevPage} aria-label="Página anterior">
+          ‹
+        </button>
+        <button className="book-arrow book-arrow-right" onClick={nextPage} aria-label="Próxima página">
+          ›
+        </button>
+
         <div className="sprite-wrapper">
           <div className="book">
-            <div className="carousel" style={{ '--slides': 4 } as React.CSSProperties}>
+            <div className="carousel" ref={carouselRef} style={{ '--slides': 4 } as React.CSSProperties}>
               <div className="sprite"></div>
               
               <div className="carousel-item">
