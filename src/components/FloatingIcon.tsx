@@ -8,30 +8,49 @@ interface FloatingIconProps {
 }
 
 const sectionMessages = [
-  "Bem-vinda ao show! 💕",
-  "700 mil corações conquistados! ✨",
-  "A energia da Bahia é contagiante! 🌟",
-  "As Mel's são lindas demais! 👶💖",
-  "Maternidade real e inspiradora! 🤱",
-  "Você é nossa inspiração! 💫",
-  "Sua comunidade te ama! 💝",
-  "Voa alto, Beqinha! 🚀",
+  ["Bem-vindos(as) ao show! 💕", "Aqui começa sua jornada! ✨", "Prepare-se para se encantar! 🌟", "feito por @_pedroigorc"],
+  ["700 mil corações conquistados! ✨", "Sua comunidade é gigante! 💖", "Você inspira milhões! 🌟", "feito por @_pedroigorc"],
+  ["A energia da Bahia é contagiante! 🌟", "Salvador te ama demais! 💛", "Axé e muita luz! ☀️", "feito por @_pedroigorc"],
+  ["As Mel's são lindas demais! 👶💖", "Suas princesas são tudo! 💕", "Família abençoada! ✨", "feito por @_pedroigorc"],
+  ["Maternidade real e inspiradora! 🤱", "Você é uma mãe incrível! 💖", "Representatividade que importa! 🌟", "feito por @_pedroigorc"],
+  ["Você é nossa inspiração! 💫", "Sua autenticidade é linda! ✨", "Continue sendo você! 💕", "feito por @_pedroigorc"],
+  ["Sua comunidade te ama! 💝", "Você faz a diferença! 🌟", "Obrigada por tudo! 💖", "feito por @_pedroigorc"],
+  ["Voa alto, Beqinha! 🚀", "O céu não é o limite! ✨", "Você é uma estrela! 🌟", "feito por @_pedroigorc"],
 ];
 
 const FloatingIcon = ({ currentSection }: FloatingIconProps) => {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('');
+  const [messageIndex, setMessageIndex] = useState(0);
+  const [isHiding, setIsHiding] = useState(false);
 
   useEffect(() => {
     if (currentSection >= 0) {
-      setMessage(sectionMessages[currentSection] || '');
+      const messages = sectionMessages[currentSection] || sectionMessages[0];
+      let index = 0;
+      
+      const showNextMessage = () => {
+        setIsHiding(true);
+        
+        setTimeout(() => {
+          setShowMessage(false);
+          setMessage(messages[index]);
+          setShowMessage(true);
+          setIsHiding(false);
+          
+          index = (index + 1) % messages.length;
+        }, 400);
+      };
+      
+      // Primeira mensagem sem animação de saída
+      setMessage(messages[0]);
       setShowMessage(true);
+      setIsHiding(false);
+      index = 1;
+      
+      const interval = setInterval(showNextMessage, 4000);
 
-      const timer = setTimeout(() => {
-        setShowMessage(false);
-      }, 3000); 
-
-      return () => clearTimeout(timer);
+      return () => clearInterval(interval);
     }
   }, [currentSection]);
 
@@ -75,7 +94,7 @@ const FloatingIcon = ({ currentSection }: FloatingIconProps) => {
       </div>
 
       {showMessage && (
-        <div className="message-balloon">
+        <div className={`message-balloon ${isHiding ? 'hide' : ''}`}>
           <div className="balloon-content">{message}</div>
           <div className="balloon-tail"></div>
         </div>

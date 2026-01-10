@@ -87,8 +87,12 @@
   bottom: 100%;
   right: 0;
   margin-bottom: 1rem;
-  animation: balloon-appear 0.3s ease-out;
+  animation: balloon-bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   pointer-events: auto;
+}
+
+.message-balloon.hide {
+  animation: balloon-bounce-out 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
 }
 
 .balloon-content {
@@ -119,14 +123,35 @@
   border-top: 10px solid rgba(255, 16, 240, 0.95);
 }
 
-@keyframes balloon-appear {
-  from {
+@keyframes balloon-bounce-in {
+  0% {
     opacity: 0;
-    transform: translateY(10px) scale(0.8);
+    transform: translateY(20px) scale(0.3);
   }
-  to {
+  50% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.05);
+  }
+  70% {
+    transform: translateY(5px) scale(0.95);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes balloon-bounce-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.5);
   }
 }
 
