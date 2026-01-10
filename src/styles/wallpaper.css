@@ -1,0 +1,456 @@
+.wallpaper-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(12px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Neon Hearts Animation */
+.neon-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10001;
+  overflow: hidden;
+}
+
+.neon-heart {
+  position: absolute;
+  bottom: -50px;
+  font-size: 40px;
+  animation: floatHeart 4s ease-out forwards;
+  filter: drop-shadow(0 0 15px #ff10f0) drop-shadow(0 0 30px #ff10f0) drop-shadow(0 0 45px #ff10f0);
+  text-shadow: 0 0 20px #ff10f0;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) scale(0.3) rotate(0deg);
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-20vh) scale(1) rotate(10deg);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-80vh) scale(1.2) rotate(-10deg);
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.5) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+.wallpaper-modal-container {
+  position: relative;
+  background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+  border-radius: 32px;
+  max-width: 1100px;
+  width: 100%;
+  padding: 40px 30px;
+  box-shadow: 
+    0 30px 90px rgba(0, 0, 0, 0.8),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wallpaper-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+}
+
+.wallpaper-close-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+}
+
+.wallpaper-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.wallpaper-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+  text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
+}
+
+.wallpaper-subtitle {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.wallpaper-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.wallpaper-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.wallpaper-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 
+    0 20px 50px rgba(102, 126, 234, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.wallpaper-image-container {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.wallpaper-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wallpaper-card:hover .wallpaper-image {
+  transform: scale(1.08);
+}
+
+.wallpaper-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.4) 40%,
+    transparent 70%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 28px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.wallpaper-card:hover .wallpaper-overlay {
+  opacity: 1;
+}
+
+.wallpaper-download-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wallpaper-download-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.wallpaper-download-btn:hover::before {
+  left: 100%;
+}
+
+.wallpaper-download-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.7);
+}
+
+.wallpaper-info {
+  padding: 28px 24px;
+}
+
+.wallpaper-card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.wallpaper-description {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.wallpaper-footer {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wallpaper-footer-text {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.wallpaper-modal-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.wallpaper-modal-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+}
+
+.wallpaper-modal-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+}
+
+.wallpaper-modal-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+}
+
+@media (max-width: 768px) {
+  .wallpaper-modal-container {
+    padding: 40px 25px;
+    border-radius: 24px;
+  }
+
+  .wallpaper-title {
+    font-size: 32px;
+  }
+
+  .wallpaper-subtitle {
+    font-size: 14px;
+  }
+
+  .wallpaper-grid {
+    display: none !important;
+  }
+
+  .wallpaper-carousel {
+    display: block !important;
+  }
+
+  .wallpaper-close-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+    top: 18px;
+    right: 18px;
+  }
+
+  .wallpaper-card-title {
+    font-size: 21px;
+  }
+
+  .wallpaper-info {
+    padding: 22px 20px;
+  }
+
+  .wallpaper-download-btn {
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+
+  .wallpaper-footer {
+    margin-top: 20px;
+  }
+}
+
+.wallpaper-carousel {
+  display: none;
+  position: relative;
+  width: 100%;
+}
+
+.carousel-track {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+}
+
+.carousel-slide {
+  display: none !important;
+  width: 100%;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: opacity 0.5s ease;
+}
+
+.carousel-slide.active {
+  display: block !important;
+  animation: fadeInSlide 0.5s ease;
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carousel-slide .wallpaper-image-container {
+  aspect-ratio: 9 / 16;
+  max-height: 65vh;
+  width: 100%;
+  display: block;
+}
+
+.carousel-slide .wallpaper-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 35%;
+  transform: translateY(-50%);
+  background: rgba(102, 126, 234, 0.9);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: white;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.3s ease;
+  font-weight: 300;
+  line-height: 1;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.6);
+}
+
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.9);
+  background: rgba(102, 126, 234, 1);
+}
+
+.carousel-arrow-left {
+  left: 10px;
+}
+
+.carousel-arrow-right {
+  right: 10px;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 28px;
+  border-radius: 5px;
+}
+
+.carousel-slide .wallpaper-download-btn {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.carousel-slide .wallpaper-overlay {
+  display: none;
+}

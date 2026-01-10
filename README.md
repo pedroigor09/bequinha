@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌟 Bequinha - Site Cinematográfico
 
-## Getting Started
+Site premium desenvolvido para **Rebeca Lemos (Bequinha)**, influencer de lifestyle e maternidade de Salvador com +700k seguidores.
 
-First, run the development server:
+## ✨ Features
+
+- 🎬 **Scroll Vertical Animado** - Seções que transitam com GSAP Observer
+- 🎯 **Parallax Multi-layer** - Efeitos de profundidade estilo Rockstar Games/Nike  
+- ✍️ **Text Animations** - Split text character por character com SplitType
+- 🎨 **Transições Suaves** - Efeitos cinematográficos nas mudanças de seção
+- 📱 **100% Responsivo** - Otimizado para mobile, tablet e desktop
+- ⚡ **Performance** - SSR/SSC com Next.js 16
+- 🖱️ **Controle Avançado** - Scroll, touch e teclado
+
+## 🚀 Tecnologias
+
+- **Next.js 16** - React Framework com App Router
+- **TypeScript** - Type safety
+- **GSAP + Observer** - Animações e controle de scroll
+- **SplitType** - Animação de texto character por character  
+- **Tailwind CSS 4** - Styling moderno
+- **React 19** - Server Components
+
+## 📦 Instalação
+
+```bash
+npm install
+```
+
+## 🏃‍♂️ Desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎨 Como Funciona
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+O site usa **GSAP Observer** para detectar gestos (scroll, touch, swipe) e transicionar entre seções verticais:
 
-## Learn More
+1. **Wrapper Duplo**: Cada seção tem `outer` e `inner` divs que animam em direções opostas
+2. **Parallax nas Imagens**: Fundo se move em velocidade diferente criando profundidade
+3. **Split Text**: Títulos e subtítulos animam character por character
+4. **Stagger Animation**: Caracteres aparecem de forma aleatória
 
-To learn more about Next.js, take a look at the following resources:
+### Estrutura de uma Seção
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```tsx
+{
+  id: 'hero',
+  title: 'Rebeca Lemos',
+  subtitle: 'Bequinha • Salvador, BA',
+  image: '/hero-bequinha.jpg',
+  placeholder: 'https://unsplash.com/...' // Fallback
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## 🖼️ Imagens Necessárias
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Veja o arquivo [IMAGES.md](IMAGES.md) para detalhes completos sobre as imagens necessárias.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚙️ Customização
+
+### Alterar Números das Stats
+
+Edite o arquivo `src/components/Stats.tsx`:
+
+```tsx
+<StatItem value={704} suffix="K" label="Seguidores" />
+```
+
+### Alterar WhatsApp
+
+Edite os arquivos:
+- `src/components/WhatsAppButton.tsx`
+- `src/components/Contact.tsx`
+
+Substitua `5571999999999` pelo número real.
+
+## 🎨 Animações de Alto Nível
+
+- **Hero**: Split text character by character + parallax background
+- **Stats**: Contadores animados que sobem ao scroll
+- **Timeline**: Cards com entrada lateral + parallax nas imagens
+- **Brands**: Scale up com bounce effect
+- **Smooth Scroll**: Lenis para navegação premium
+
+## 📱 100% Responsivo
+
+Breakpoints otimizados para todas as telas.
+
+## 🌐 Deploy
+
+Deploy na Vercel com um clique ou qualquer plataforma Next.js.
+
+---
+
+**Desenvolvido com 💜 para Rebeca Lemos**
+

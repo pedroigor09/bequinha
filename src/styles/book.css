@@ -1,0 +1,427 @@
+@font-face {
+  font-family: PixelText;
+  src: url(https://assets.codepen.io/36869/Grand9KPixel.ttf);
+}
+
+:root {
+  --sprite-image: url(https://assets.codepen.io/36869/book.webp);
+  --sprite-as: .8s;
+  --sprite-ad: normal;
+  --sprite-af: none;
+  --sprite-ap: running;
+  --sprite-ai: infinite;
+  --sprite-at: linear;
+  --sprite-fr: 12;
+}
+
+.book-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(36, 36, 36, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease-in-out;
+  overflow: hidden;
+  font-family: 'PixelText', serif;
+  box-sizing: border-box;
+  padding: 1rem;
+  color: #d2d4e1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.book-close {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #f840a8;
+  background: transparent;
+  color: #f840a8;
+  font-size: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10002;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-close:hover {
+  background: #f840a8;
+  color: #242424;
+  transform: rotate(90deg);
+}
+
+.polaroid {
+  position: fixed;
+  width: 200px;
+  background: white;
+  padding: 15px;
+  padding-bottom: 45px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+  pointer-events: none;
+  animation: float 6s ease-in-out infinite;
+}
+
+.polaroid img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(var(--rotate-start));
+  }
+  50% {
+    transform: translateY(-20px) rotate(var(--rotate-end));
+  }
+}
+
+.polaroid-1 {
+  top: 10%;
+  left: 5%;
+  --rotate-start: -8deg;
+  --rotate-end: -5deg;
+  animation-delay: 0s;
+}
+
+.polaroid-2 {
+  top: 15%;
+  right: 8%;
+  --rotate-start: 12deg;
+  --rotate-end: 8deg;
+  animation-delay: 0.5s;
+}
+
+.polaroid-3 {
+  top: 45%;
+  left: 2%;
+  --rotate-start: -15deg;
+  --rotate-end: -10deg;
+  animation-delay: 1s;
+}
+
+.polaroid-4 {
+  top: 50%;
+  right: 3%;
+  --rotate-start: 10deg;
+  --rotate-end: 15deg;
+  animation-delay: 1.5s;
+}
+
+.polaroid-5 {
+  bottom: 15%;
+  left: 10%;
+  --rotate-start: 8deg;
+  --rotate-end: 12deg;
+  animation-delay: 2s;
+}
+
+.polaroid-6 {
+  bottom: 20%;
+  right: 12%;
+  --rotate-start: -10deg;
+  --rotate-end: -6deg;
+  animation-delay: 2.5s;
+}
+
+.polaroid-7 {
+  top: 30%;
+  left: 50%;
+  margin-left: -100px;
+  --rotate-start: 5deg;
+  --rotate-end: -5deg;
+  animation-delay: 3s;
+  opacity: 0.7;
+}
+
+@media (max-width: 1200px) {
+  .polaroid {
+    width: 150px;
+    padding: 10px;
+    padding-bottom: 35px;
+  }
+  
+  .polaroid-7 {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .polaroid {
+    width: 120px;
+    padding: 8px;
+    padding-bottom: 25px;
+  }
+  
+  .polaroid-3,
+  .polaroid-6 {
+    display: none;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.sprite-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@property --sprite-fs {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: true;
+}
+
+@property --_progress {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  --sprite-c: 5;
+  --sprite-h: 3000;
+  --sprite-w: 9600;
+  --sprite-f: 7;
+  --sprite-as: calc(var(--sprite-f) / var(--sprite-fr) * 1s);
+  --sprite-r: round(up, calc(var(--sprite-f) / var(--sprite-c)), 1);
+  --sprite-sh: calc(var(--sprite-h) / var(--sprite-r));
+  --sprite-th: calc(var(--sprite-sh) / 2);
+  --sprite-ar: calc(var(--sprite-th) / var(--sprite-sh));
+  --sprite-uh: calc(var(--sprite-h) * var(--sprite-ar));
+  --sprite-uw: calc(var(--sprite-w) * var(--sprite-ar));
+  --sprite-tw: calc(var(--sprite-uw) / var(--sprite-c));
+}
+
+.container > h1 {
+  color: #d2d4e1;
+  margin: 0 auto;
+  width: fit-content;
+  font-weight: 500;
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+.book {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    "scroll scroll scroll"
+    "left markers right";
+  gap: 1rem;
+}
+
+.book .sprite {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(1px * var(--sprite-th));
+  width: calc(1px * var(--sprite-tw));
+  margin: calc(-1px * calc((var(--sprite-th) - (var(--sprite-th) * 0.6107)) / 2)) calc(-1px * calc((var(--sprite-tw) - (var(--sprite-tw) * 0.7042)) / 2));
+  background-image: var(--sprite-image);
+  transform-origin: center center;
+  background-repeat: no-repeat;
+  background-size: calc(1px * var(--sprite-uw)) calc(1px * var(--sprite-uh));
+  z-index: -1;
+  --sprite-fe: calc(var(--sprite-f) * (var(--slides) - 1));
+  --sprite-fs-n: mod(var(--sprite-fs), var(--sprite-f));
+  --row: calc(round(down, calc(calc(var(--sprite-tw) * var(--sprite-fs-n)) / var(--sprite-uw)), 1) * var(--sprite-th));
+  --col: mod(calc(var(--sprite-tw) * var(--sprite-fs-n)), var(--sprite-uw));
+  background-position: calc(-1px * var(--col)) calc(-1px * var(--row));
+  animation: frame var(--sprite-as) var(--sprite-at) 0s var(--sprite-ad) var(--sprite-af) var(--sprite-ap);
+  animation-timeline: --carousel-timeline;
+}
+
+.carousel {
+  counter-increment: curpage;
+  grid-area: scroll;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  display: grid;
+  margin: 0 auto;
+  width: calc(1px * (var(--sprite-tw) * 0.7042));
+  height: calc(1px * (var(--sprite-th) * 0.6107));
+  grid: 1fr / auto-flow 100%;
+  scroll-timeline: --carousel-timeline x;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.carousel-item {
+  scroll-snap-stop: always;
+  scroll-snap-align: start;
+  animation: count-before linear forwards;
+  animation-range: exit;
+  counter-increment: page;
+  animation-timeline: view(x);
+  position: relative;
+  box-sizing: border-box;
+  color: #333;
+}
+
+.page-container {
+  display: flex;
+  gap: 3rem;
+  height: 100%;
+  animation: stay-centered linear both;
+  animation-timeline: view(x);
+  timeline-scope: --parallax-item;
+}
+
+.left-page,
+.right-page {
+  flex: 1;
+  font-size: small;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background: #f1e2b2;
+  color: #333;
+}
+
+.left-page:after,
+.right-page:after {
+  bottom: 15px;
+  color: hsl(45.71deg 69.23% 30%);
+}
+
+.left-page > div,
+.right-page > div {
+  text-align: justify;
+  hyphens: auto;
+  line-height: normal;
+  display: block;
+  word-wrap: break-word;
+}
+
+.left-page {
+  padding: 20px 0 20px 20px;
+}
+
+.left-page:after {
+  content: counter(curpage);
+}
+
+.right-page {
+  padding: 20px 20px 20px 0;
+  counter-increment: curpage;
+}
+
+.right-page:after {
+  content: counter(curpage);
+  place-self: self-end;
+}
+
+@media (width < 748px) {
+  .container {
+    --sprite-th: calc(var(--sprite-sh) / 2.5);
+  }
+
+  .container > h1 {
+    font-size: 1.25rem;
+  }
+
+  .left-page > div,
+  .right-page > div {
+    font-size: .6rem;
+  }
+}
+
+@media (width < 560px) {
+  .container {
+    --sprite-th: calc(var(--sprite-sh) / 4);
+  }
+
+  .container > h1 {
+    font-size: 1rem;
+  }
+
+  .left-page > div,
+  .right-page > div {
+    font-size: .35rem;
+  }
+
+  .left-page:after,
+  .right-page:after {
+    font-size: .5rem;
+  }
+}
+
+@keyframes stay-centered {
+  entry 0% {
+    opacity: 0;
+    translate: -100%;
+  }
+  entry 75% {
+    opacity: 0;
+    translate: -25%;
+  }
+  entry 100% {
+    opacity: 1;
+    translate: 0%;
+  }
+  exit 0% {
+    opacity: 1;
+    translate: 0%;
+  }
+  exit 50% {
+    opacity: 0;
+    translate: 50%;
+  }
+  exit 100% {
+    opacity: 0;
+    translate: 100%;
+  }
+}
+
+@keyframes count-before {
+  1%,
+  100% {
+    counter-increment: page curpage;
+  }
+}
+
+@keyframes progress {
+  100% {
+    --_progress: 100%;
+  }
+}
+
+@keyframes frame {
+  to {
+    --sprite-fs: var(--sprite-fe);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  * {
+    animation: none;
+  }
+}

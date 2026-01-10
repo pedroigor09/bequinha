@@ -1,0 +1,175 @@
+.floating-icon-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.floating-icon {
+  width: 80px;
+  height: 80px;
+  animation: float 3s ease-in-out infinite, rotate-slow 8s linear infinite;
+}
+
+.dank-ass-loader-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(0.6);
+}
+
+.dank-ass-loader-mini .row {
+  display: flex;
+}
+
+.dank-ass-loader-mini .arrow {
+  width: 0;
+  height: 0;
+  margin: 0 -6px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 21.6px solid #ff10f0;
+  animation: blink 1s infinite;
+  filter: drop-shadow(0 0 18px #ff10f0);
+}
+
+.dank-ass-loader-mini .arrow.down {
+  transform: rotate(180deg);
+}
+
+.dank-ass-loader-mini .arrow.outer-1 { animation-delay: -0.0556s; }
+.dank-ass-loader-mini .arrow.outer-2 { animation-delay: -0.1111s; }
+.dank-ass-loader-mini .arrow.outer-3 { animation-delay: -0.1667s; }
+.dank-ass-loader-mini .arrow.outer-4 { animation-delay: -0.2222s; }
+.dank-ass-loader-mini .arrow.outer-5 { animation-delay: -0.2778s; }
+.dank-ass-loader-mini .arrow.outer-6 { animation-delay: -0.3333s; }
+.dank-ass-loader-mini .arrow.outer-7 { animation-delay: -0.3889s; }
+.dank-ass-loader-mini .arrow.outer-8 { animation-delay: -0.4444s; }
+.dank-ass-loader-mini .arrow.outer-9 { animation-delay: -0.5s; }
+.dank-ass-loader-mini .arrow.outer-10 { animation-delay: -0.5556s; }
+.dank-ass-loader-mini .arrow.outer-11 { animation-delay: -0.6111s; }
+.dank-ass-loader-mini .arrow.outer-12 { animation-delay: -0.6667s; }
+.dank-ass-loader-mini .arrow.outer-13 { animation-delay: -0.7222s; }
+.dank-ass-loader-mini .arrow.outer-14 { animation-delay: -0.7778s; }
+.dank-ass-loader-mini .arrow.outer-15 { animation-delay: -0.8333s; }
+.dank-ass-loader-mini .arrow.outer-16 { animation-delay: -0.8889s; }
+.dank-ass-loader-mini .arrow.outer-17 { animation-delay: -0.9444s; }
+.dank-ass-loader-mini .arrow.outer-18 { animation-delay: -1s; }
+
+.dank-ass-loader-mini .arrow.inner-1 { animation-delay: -0.1667s; }
+.dank-ass-loader-mini .arrow.inner-2 { animation-delay: -0.3333s; }
+.dank-ass-loader-mini .arrow.inner-3 { animation-delay: -0.5s; }
+.dank-ass-loader-mini .arrow.inner-4 { animation-delay: -0.6667s; }
+.dank-ass-loader-mini .arrow.inner-5 { animation-delay: -0.8333s; }
+.dank-ass-loader-mini .arrow.inner-6 { animation-delay: -1s; }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.message-balloon {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 1rem;
+  animation: balloon-appear 0.3s ease-out;
+  pointer-events: auto;
+}
+
+.balloon-content {
+  background: rgba(255, 16, 240, 0.95);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 
+    0 4px 20px rgba(255, 16, 240, 0.4),
+    0 0 30px rgba(255, 16, 240, 0.3);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  text-transform: none;
+  letter-spacing: 0.5px;
+}
+
+.balloon-tail {
+  position: absolute;
+  bottom: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgba(255, 16, 240, 0.95);
+}
+
+@keyframes balloon-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-icon-container {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .floating-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .dank-ass-loader-mini {
+    transform: scale(0.45);
+  }
+
+  .balloon-content {
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-icon-container {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .floating-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .dank-ass-loader-mini {
+    transform: scale(0.35);
+  }
+
+  .balloon-content {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.85rem;
+    max-width: 200px;
+    white-space: normal;
+  }
+}
