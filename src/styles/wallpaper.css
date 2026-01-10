@@ -74,9 +74,9 @@
 @media (max-width: 768px) {
   .wallpaper-modal-container {
     max-width: 95vw;
-    padding: 20px 15px;
-    border-radius: 20px;
-    max-height: 85vh;
+    padding: 15px 12px;
+    border-radius: 16px;
+    max-height: 80vh;
   }
 }
 
@@ -110,10 +110,10 @@
   .wallpaper-close-btn {
     display: flex;
     position: static;
-    margin: 10px auto 0;
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
+    margin: 8px auto 0;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
     background: rgba(255, 16, 240, 0.2);
     border: 2px solid rgba(255, 16, 240, 0.5);
     box-shadow: 0 0 20px rgba(255, 16, 240, 0.4);
@@ -134,8 +134,8 @@
 
 @media (max-width: 768px) {
   .wallpaper-header {
-    margin-bottom: 15px;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
   }
 }
 
@@ -154,8 +154,8 @@
 
 @media (max-width: 768px) {
   .wallpaper-title {
-    font-size: 20px;
-    margin-bottom: 5px;
+    font-size: 18px;
+    margin-bottom: 4px;
   }
 }
 
@@ -169,7 +169,7 @@
 
 @media (max-width: 768px) {
   .wallpaper-subtitle {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
 
@@ -201,6 +201,7 @@
   aspect-ratio: 2 / 3;
   overflow: hidden;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  cursor: pointer;
 }
 
 .wallpaper-image {
@@ -228,11 +229,27 @@
   justify-content: center;
   padding: 28px;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.4s ease;
+  z-index: 5;
 }
 
-.wallpaper-card:hover .wallpaper-overlay {
-  opacity: 1;
+.wallpaper-overlay.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  display: flex !important;
+}
+
+@media (max-width: 768px) {
+  .wallpaper-overlay.active {
+    opacity: 1 !important;
+  }
+  
+  .wallpaper-overlay {
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .wallpaper-download-btn {
@@ -353,24 +370,24 @@
   }
 
   .wallpaper-card-title {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .wallpaper-info {
-    padding: 18px 15px;
+    padding: 12px;
   }
 
   .wallpaper-download-btn {
-    padding: 12px 24px;
-    font-size: 14px;
+    padding: 10px 20px;
+    font-size: 13px;
   }
 
   .wallpaper-footer {
-    margin-top: 15px;
+    margin-top: 12px;
   }
   
   .wallpaper-footer-text {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
 
@@ -414,9 +431,24 @@
 
 .carousel-slide .wallpaper-image-container {
   aspect-ratio: 9 / 16;
-  max-height: 55vh;
+  max-height: 48vh;
   width: 100%;
   display: block;
+  cursor: pointer;
+}
+
+.carousel-slide .wallpaper-info {
+  padding: 12px;
+}
+
+.carousel-slide .wallpaper-card-title {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.carousel-slide .wallpaper-description {
+  font-size: 11px;
+  margin: 0;
 }
 
 .carousel-slide .wallpaper-image {

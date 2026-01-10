@@ -31,6 +31,7 @@ const wallpapers = [
 export default function WallpaperModal({ isOpen, onClose }: WallpaperModalProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showHearts, setShowHearts] = useState(false);
+  const [activeOverlay, setActiveOverlay] = useState<number | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -71,10 +72,12 @@ export default function WallpaperModal({ isOpen, onClose }: WallpaperModalProps)
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % wallpapers.length);
+    setActiveOverlay(null);
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + wallpapers.length) % wallpapers.length);
+    setActiveOverlay(null);
   };
 
   return (
@@ -111,9 +114,12 @@ export default function WallpaperModal({ isOpen, onClose }: WallpaperModalProps)
 
         {/* Grid para desktop */}
         <div className="wallpaper-grid">
-          {wallpapers.map((wallpaper) => (
+          {wallpapers.map((wallpaper, index) => (
             <div key={wallpaper.id} className="wallpaper-card">
-              <div className="wallpaper-image-container">
+              <div 
+                className="wallpaper-image-container"
+                onClick={() => setActiveOverlay(activeOverlay === index ? null : index)}
+              >
                 <img
                   src={wallpaper.image}
                   alt={wallpaper.title}
@@ -122,9 +128,12 @@ export default function WallpaperModal({ isOpen, onClose }: WallpaperModalProps)
                     (e.target as HTMLImageElement).src = '/beq1.jpg';
                   }}
                 />
-                <div className="wallpaper-overlay">
+                <div className={`wallpaper-overlay ${activeOverlay === index ? 'active' : ''}`}>
                   <button
-                    onClick={() => handleDownload(wallpaper.image, wallpaper.title)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDownload(wallpaper.image, wallpaper.title);
+                    }}
                     className="wallpaper-download-btn"
                   >
                     ⬇️ Baixar
@@ -151,7 +160,14 @@ export default function WallpaperModal({ isOpen, onClose }: WallpaperModalProps)
                 key={wallpaper.id} 
                 className={`wallpaper-card carousel-slide ${index === currentSlide ? 'active' : ''}`}
               >
-                <div className="wallpaper-image-container">
+                <div 
+                  className="wallpaper-image-container"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const overlayIndex = 100 + index;
+                    setActiveOverlay(activeOverlay === overlayIndex ? null : overlayIndex);
+                  }}
+                >
                   <img
                     src={wallpaper.image}
                     alt={wallpaper.title}
@@ -160,16 +176,21 @@ export default function WallpaperModal({ isOpen, onClose }: WallpaperModalProps)
                       (e.target as HTMLImageElement).src = '/beq1.jpg';
                     }}
                   />
+                  <div className={`wallpaper-overlay ${activeOverlay === (100 + index) ? 'active' : ''}`}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownload(wallpaper.image, wallpaper.title);
+                      }}
+                      className="wallpaper-download-btn"
+                    >
+                      ⬇️ Baixar
+                    </button>
+                  </div>
                 </div>
                 <div className="wallpaper-info">
                   <h3 className="wallpaper-card-title">{wallpaper.title}</h3>
                   <p className="wallpaper-description">{wallpaper.description}</p>
-                  <button
-                    onClick={() => handleDownload(wallpaper.image, wallpaper.title)}
-                    className="wallpaper-download-btn"
-                  >
-                    ⬇️ Baixar
-                  </button>
                 </div>
               </div>
             ))}
