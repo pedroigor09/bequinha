@@ -38,6 +38,14 @@
   text-shadow: 0 0 20px #ff10f0;
 }
 
+@media (max-width: 768px) {
+  .neon-heart {
+    filter: drop-shadow(0 0 10px #ff10f0);
+    text-shadow: 0 0 10px #ff10f0;
+    will-change: transform, opacity;
+  }
+}
+
 @keyframes floatHeart {
   0% {
     transform: translateY(0) scale(0.3) rotate(0deg);
