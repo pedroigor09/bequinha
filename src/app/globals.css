@@ -22,6 +22,9 @@ body {
   overflow: hidden;
   color: white;
   text-transform: uppercase;
+  -webkit-touch-callout: default;
+  -webkit-user-select: auto;
+  user-select: auto;
 }
 
 .section-heading,
