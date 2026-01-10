@@ -248,12 +248,12 @@ export default function AnimatedSections() {
     <div ref={containerRef}>
       <header className="fixed left-0 right-0 top-0 z-50 flex items-center justify-end px-8 py-6 text-white md:px-12">
         <a
-          href="https://www.instagram.com/bequinha/"
+          href="https://www.instagram.com/beqinha/"
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-full bg-white/10 px-6 py-2 text-sm font-medium backdrop-blur-md transition-all hover:bg-white/20"
         >
-          @BEQUINHA
+          @BEQINHA
         </a>
       </header>
 
