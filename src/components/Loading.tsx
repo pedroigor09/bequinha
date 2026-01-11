@@ -11,18 +11,20 @@ const Loading = ({ onLoadingComplete }: LoadingProps) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const fullText = `Bem-vindo ao universo de Rebeca Lemos...
+  const fullText = `Sua história merece um palco maior que o Instagram.
 
-Uma homenagem especial à mãe que inspira 700 mil corações.
+Reunimos a energia vibrante da Bahia, a autenticidade da maternidade real 
+e o encanto irresistível de Melinda e Melissa em uma experiência digital imersiva.
 
-Este é um site cinematográfico criado com carinho para celebrar a Beqinha, 
-a energia contagiante da Bahia, e o amor em dose tripla com Melinda e Melissa.
+Isto não é apenas uma timeline. É a curadoria dos momentos que transformaram 
+uma rotina em inspiração para mais de 700 mil pessoas.
 
-Prepare-se para uma experiência única, onde cada rolagem revela 
-uma nova faceta dessa mulher incrível que encanta nosso feed todos os dias.
+Cada frame, cada conquista, cada sorriso genuíno, tudo meticulosamente 
+preservado neste portal que celebra não apenas uma influenciadora, 
+mas uma força da natureza chamada Beqinha.
 
-Aqui você encontrará momentos especiais, mensagens carinhosas 
-e uma comunidade que admira cada segundo da sua jornada na maternidade.
+Aqui, você mergulhará em camadas de história, conexão autêntica e 
+essa magia indescritível que só ela consegue criar.
 
 Vamos começar?`;
 
